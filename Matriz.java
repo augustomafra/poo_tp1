@@ -53,6 +53,15 @@ public class Matriz {
     	}
     }
 
+    public Matriz mult(double valor) {
+    	int i,j;
+    	for(i=0; i<nrow; i++){
+    		for(j=0; j<ncol; j++){
+    			m[i][j]=m[i][j] * valor;
+    		}
+    	}
+        return this;
+    }
 
     public Matriz add(Matriz A){
     	if(A.getRows()!=this.nrow || A.getCols()!=this.ncol){
