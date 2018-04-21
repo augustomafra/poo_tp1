@@ -83,11 +83,11 @@ public class Matriz {
     }
 
     public Matriz transp(){
-        // TODO Tratar matriz nao quadrada
         double[][] old_m = m;
     	int i,j;
-    	for(i=0; i<nrow; i++){
-    		for(j=0; j<ncol; j++){
+    	 m = new double[ncol][nrow];
+    	for(i=0; i<ncol; i++){
+    		for(j=0; j<nrow; j++){
     			m[i][j]=old_m[j][i];
     		}
     	}
@@ -144,6 +144,13 @@ public class Matriz {
         Matriz p = new Matriz(2, 2);
         m.set(10, 1, 5);
         m.print();
+
+        Matriz q = new Matriz(4,2);
+        q.zeros();
+        q.set(4,1,10);
+        q.transp();
+        q.print();
+
 
         //Matriz wrong_m1 = new Matriz(1, -2);
         //Matriz wrong_m2 = new Matriz(0, -2);
