@@ -34,6 +34,24 @@ public class Matriz {
     	}
     }
 
+    public void unit(){
+    	int i,j;
+    	if(ncol!=nrow){
+    		throw new IndexOutOfBoundsException("Erro: A matriz identidade deve ser quadrada");
+    	}
+
+    	for(i=0; i<nrow; i++){
+    		for(j=0; j<ncol; j++){
+    			if(i==j){
+    				m[i][j]=1;
+    			}else{
+    				m[i][j]=0;
+    			}
+
+    		}
+    	}
+    }
+
     public static void main(String[] args) {
         Matriz m = new Matriz(1,2);
         System.out.println("rows = " + m.getRows());
