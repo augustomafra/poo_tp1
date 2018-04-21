@@ -54,7 +54,7 @@ public class Matriz {
     }
 
 
-    public void add(Matriz A){
+    public Matriz add(Matriz A){
     	if(A.getRows()!=this.nrow || A.getCols()!=this.ncol){
     		throw new IndexOutOfBoundsException("Erro: A dimensões das matrizes devem ser iguais");
 
@@ -65,9 +65,10 @@ public class Matriz {
     			m[i][j]=m[i][j]+A.at(i,j);
     		}
     	}
+        return this;
     }
 
-    public void sub(Matriz A){
+    public Matriz sub(Matriz A){
     	if(A.getRows()!=this.nrow || A.getCols()!=this.ncol){
     		throw new IndexOutOfBoundsException("Erro: A dimensões das matrizes devem ser iguais");
 
@@ -78,19 +79,22 @@ public class Matriz {
     			m[i][j]=m[i][j]-A.at(i,j);
     		}
     	}
+        return this;
     }
 
-    public void transp(Matriz A){
-    	if(A.getRows()!=this.nrow || A.getCols()!=this.ncol){
-    		throw new IndexOutOfBoundsException("Erro: A dimensões das matrizes devem ser iguais");
-
-    	}
+    public Matriz transp(){
+        // TODO Tratar matriz nao quadrada
+        double[][] old_m = m;
     	int i,j;
     	for(i=0; i<nrow; i++){
     		for(j=0; j<ncol; j++){
-    			m[i][j]=A.at(j,i);
+    			m[i][j]=old_m[j][i];
     		}
     	}
+        int aux = nrow;
+        nrow = ncol;
+        ncol = aux;
+        return this;
     }
 
     public double at(int i, int j){
@@ -102,7 +106,7 @@ public class Matriz {
 	public void set(int i, int j, double value){
     	m[i][j]=value;
 
-    }    
+    }
 
     public void print() {
     	for(int i=0; i<nrow; i++){
@@ -132,8 +136,6 @@ public class Matriz {
         Matriz o = new Matriz(1, 10);
         o.ones();
         o.print();
-
-
 
         //Matriz wrong_m1 = new Matriz(1, -2);
         //Matriz wrong_m2 = new Matriz(0, -2);
