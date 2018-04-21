@@ -2,10 +2,10 @@ public class Matriz {
 
     public Matriz(int nrow, int ncol) {
         if (ncol <= 0) {
-            throw new IndexOutOfBoundsException(Integer.toString(ncol));
+            throw new IndexOutOfBoundsException("Erro: Dimensao invalida para colunas: " + Integer.toString(ncol));
         }
         if (nrow <= 0) {
-            throw new IndexOutOfBoundsException(Integer.toString(nrow));
+            throw new IndexOutOfBoundsException("Erro: Dimensao invalida para linhas: " + Integer.toString(nrow));
         }
         this.ncol = ncol;
         this.nrow = nrow;
@@ -138,6 +138,24 @@ public class Matriz {
         //Matriz wrong_m1 = new Matriz(1, -2);
         //Matriz wrong_m2 = new Matriz(0, -2);
     }
+
+    private void expand(int new_nrow, int new_ncol) {
+        if (new_ncol < ncol) {
+            throw new IndexOutOfBoundsException("Erro Interno: Impossivel reduzir matriz de " + Integer.toString(ncol) + " para " + Integer.toString(new_ncol));
+        }
+        if (new_nrow < nrow) {
+            throw new IndexOutOfBoundsException("Erro Interno: Impossivel reduzir matriz de " + Integer.toString(nrow) + " para " + Integer.toString(new_nrow));
+        }
+
+        double[][] old_m = m;
+        m = new double[new_nrow][new_ncol];
+        for (int i = 0; i < nrow; i++) {
+            for (int j = 0; j < ncol; j++) {
+                m[i][j] = old_m[i][j];
+            }
+        }
+    }
+
     private double[][] m ;
     private int ncol, nrow;
 }
