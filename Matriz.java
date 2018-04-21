@@ -53,6 +53,31 @@ public class Matriz {
     	}
     }
 
+
+    public void add(Matriz A){
+    	if(A.getRows()!=this.nrow || A.getCols()!=this.ncol){
+    		throw new IndexOutOfBoundsException("Erro: A dimensões das matrizes devem ser iguais");
+
+    	}
+    	int i,j;
+    	for(i=0; i<nrow; i++){
+    		for(j=0; j<ncol; j++){
+    			m[i][j]=m[i][j]+A.at(i,j);
+    		}
+    	}
+    }
+
+    public double at(int i, int j){
+    	double value=m[i][j];
+
+    	return value;
+    }
+
+	public void set(int i, int j, double value){
+    	m[i][j]=value;
+
+    }    
+
     public void print() {
     	for(int i=0; i<nrow; i++){
             System.out.print("[");
@@ -61,6 +86,7 @@ public class Matriz {
             }
             System.out.print(m[i][ncol-1] + "]\n");
         }
+
     }
 
     public static void main(String[] args) {
@@ -80,6 +106,8 @@ public class Matriz {
         Matriz o = new Matriz(1, 10);
         o.ones();
         o.print();
+
+
 
         //Matriz wrong_m1 = new Matriz(1, -2);
         //Matriz wrong_m2 = new Matriz(0, -2);
