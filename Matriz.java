@@ -63,6 +63,22 @@ public class Matriz {
         return this;
     }
 
+    public Matriz mult(Matriz A) {
+        if (ncol != A.getRows()) {
+    		throw new IndexOutOfBoundsException("Erro: Dimensoes incompativeis de matrizes para multiplicacao");
+        }
+        double[][] aux = new double[nrow][ncol];
+        for (int i = 0; i < nrow; i++) {
+            for (int j = 0; j < A.getCols(); j++) {
+                for (int k = 0; k < ncol; k++) {
+                    aux[i][j] += m[i][k] * A.at(k, j);
+                }
+            }
+        }
+        m = aux;
+        return this;
+    }
+
     public Matriz add(Matriz A){
     	if(A.getRows()!=this.nrow || A.getCols()!=this.ncol){
     		throw new IndexOutOfBoundsException("Erro: A dimensões das matrizes devem ser iguais");
