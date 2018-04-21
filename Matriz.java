@@ -67,6 +67,32 @@ public class Matriz {
     	}
     }
 
+    public void sub(Matriz A){
+    	if(A.getRows()!=this.nrow || A.getCols()!=this.ncol){
+    		throw new IndexOutOfBoundsException("Erro: A dimensões das matrizes devem ser iguais");
+
+    	}
+    	int i,j;
+    	for(i=0; i<nrow; i++){
+    		for(j=0; j<ncol; j++){
+    			m[i][j]=m[i][j]-A.at(i,j);
+    		}
+    	}
+    }
+
+    public void transp(Matriz A){
+    	if(A.getRows()!=this.nrow || A.getCols()!=this.ncol){
+    		throw new IndexOutOfBoundsException("Erro: A dimensões das matrizes devem ser iguais");
+
+    	}
+    	int i,j;
+    	for(i=0; i<nrow; i++){
+    		for(j=0; j<ncol; j++){
+    			m[i][j]=A.at(j,i);
+    		}
+    	}
+    }
+
     public double at(int i, int j){
     	double value=m[i][j];
 
