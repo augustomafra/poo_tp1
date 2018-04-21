@@ -73,6 +73,10 @@ public class Matriz {
     	return value;
     }
 
+	public void set(int i, int j, double value){
+    	m[i][j]=value;
+
+    }    
 
     public void print() {
     	for(int i=0; i<nrow; i++){
