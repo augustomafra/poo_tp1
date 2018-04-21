@@ -9,6 +9,7 @@ public class Matriz {
         }
         this.ncol = ncol;
         this.nrow = nrow;
+        m = new double[nrow][ncol];
     }
 
     public int getRows() { return nrow; }
@@ -59,8 +60,8 @@ public class Matriz {
         m.zeros();
         m.ones();
 
-        Matriz wrong_m1 = new Matriz(1, -2);
-        Matriz wrong_m2 = new Matriz(0, -2);
+        //Matriz wrong_m1 = new Matriz(1, -2);
+        //Matriz wrong_m2 = new Matriz(0, -2);
     }
     private double[][] m ;
     private int ncol, nrow;
