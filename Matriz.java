@@ -98,7 +98,7 @@ public class Matriz {
     }
 
     public double at(int i, int j){
-    	double value=m[i][j];
+    	double value=m[i-1][j-1];
 
     	return value;
     }
