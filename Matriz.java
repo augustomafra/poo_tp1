@@ -1,6 +1,6 @@
 public class Matriz {
 
-    public Matriz(int ncol, int nrow) {
+    public Matriz(int nrow, int ncol) {
         if (ncol <= 0) {
             throw new IndexOutOfBoundsException(Integer.toString(ncol));
         }
@@ -53,12 +53,33 @@ public class Matriz {
     	}
     }
 
+    public void print() {
+    	for(int i=0; i<nrow; i++){
+            System.out.print("[");
+    		for(int j=0; j<ncol-1; j++){
+                System.out.print(m[i][j] + "\t");
+            }
+            System.out.print(m[i][ncol-1] + "]\n");
+        }
+    }
+
     public static void main(String[] args) {
         Matriz m = new Matriz(1,2);
         System.out.println("rows = " + m.getRows());
         System.out.println("columns = " + m.getCols());
         m.zeros();
         m.ones();
+        //m.unit();
+
+        m.print();
+
+        Matriz n = new Matriz(4, 4);
+        n.unit();
+        n.print();
+
+        Matriz o = new Matriz(1, 10);
+        o.ones();
+        o.print();
 
         //Matriz wrong_m1 = new Matriz(1, -2);
         //Matriz wrong_m2 = new Matriz(0, -2);
