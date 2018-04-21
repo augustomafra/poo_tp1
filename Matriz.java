@@ -1,6 +1,6 @@
 public class Matriz {
 
-    public Matriz(int ncol, int nrow) {
+    public Matriz(int nrow, int ncol) {
         if (ncol <= 0) {
             throw new IndexOutOfBoundsException(Integer.toString(ncol));
         }
@@ -53,6 +53,7 @@ public class Matriz {
     	}
     }
 
+
     public void add(Matriz A){
     	if(A.getRows()!=this.nrow || A.getCols()!=this.ncol){
     		throw new IndexOutOfBoundsException("Erro: A dimensões das matrizes devem ser iguais");
@@ -70,6 +71,17 @@ public class Matriz {
     	double value=m[i][j];
 
     	return value;
+    }
+
+
+    public void print() {
+    	for(int i=0; i<nrow; i++){
+            System.out.print("[");
+    		for(int j=0; j<ncol-1; j++){
+                System.out.print(m[i][j] + "\t");
+            }
+            System.out.print(m[i][ncol-1] + "]\n");
+        }
 
     }
 
@@ -79,6 +91,17 @@ public class Matriz {
         System.out.println("columns = " + m.getCols());
         m.zeros();
         m.ones();
+        //m.unit();
+
+        m.print();
+
+        Matriz n = new Matriz(4, 4);
+        n.unit();
+        n.print();
+
+        Matriz o = new Matriz(1, 10);
+        o.ones();
+        o.print();
 
 
 
