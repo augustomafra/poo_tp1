@@ -104,7 +104,11 @@ public class Matriz {
     }
 
 	public void set(int i, int j, double value){
-    	m[i][j]=value;
+    	if (i > nrow || j > ncol) {
+            expand(java.lang.Math.max(i, nrow), java.lang.Math.max(j, ncol));
+        }
+
+        m[i-1][j-1]=value;
 
     }
 
@@ -137,6 +141,10 @@ public class Matriz {
         o.ones();
         o.print();
 
+        Matriz p = new Matriz(2, 2);
+        m.set(10, 1, 5);
+        m.print();
+
         //Matriz wrong_m1 = new Matriz(1, -2);
         //Matriz wrong_m2 = new Matriz(0, -2);
     }
@@ -156,6 +164,9 @@ public class Matriz {
                 m[i][j] = old_m[i][j];
             }
         }
+
+        ncol = new_ncol;
+        nrow = new_nrow;
     }
 
     private double[][] m ;
