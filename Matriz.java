@@ -53,12 +53,34 @@ public class Matriz {
     	}
     }
 
+    public void add(Matriz A){
+    	if(A.getRows()!=this.nrow || A.getCols()!=this.ncol){
+    		throw new IndexOutOfBoundsException("Erro: A dimensões das matrizes devem ser iguais");
+
+    	}
+    	int i,j;
+    	for(i=0; i<nrow; i++){
+    		for(j=0; j<ncol; j++){
+    			m[i][j]=m[i][j]+A.at(i,j);
+    		}
+    	}
+    }
+
+    public double at(int i, int j){
+    	double value=m[i][j];
+
+    	return value;
+
+    }
+
     public static void main(String[] args) {
         Matriz m = new Matriz(1,2);
         System.out.println("rows = " + m.getRows());
         System.out.println("columns = " + m.getCols());
         m.zeros();
         m.ones();
+
+
 
         //Matriz wrong_m1 = new Matriz(1, -2);
         //Matriz wrong_m2 = new Matriz(0, -2);
