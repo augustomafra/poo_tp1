@@ -71,7 +71,7 @@ public class Matriz {
         for (int i = 0; i < nrow; i++) {
             for (int j = 0; j < A.getCols(); j++) {
                 for (int k = 0; k < ncol; k++) {
-                    aux[i][j] += m[i][k] * A.at(k, j);
+                    aux[i][j] += m[i][k] * A.at(k+1, j+1);
                 }
             }
         }
@@ -87,7 +87,7 @@ public class Matriz {
     	int i,j;
     	for(i=0; i<nrow; i++){
     		for(j=0; j<ncol; j++){
-    			m[i][j]=m[i][j]+A.at(i,j);
+    			m[i][j]=m[i][j]+A.at(i+1,j+1);
     		}
     	}
         return this;
@@ -101,7 +101,7 @@ public class Matriz {
     	int i,j;
     	for(i=0; i<nrow; i++){
     		for(j=0; j<ncol; j++){
-    			m[i][j]=m[i][j]-A.at(i,j);
+    			m[i][j]=m[i][j]-A.at(i+1,j+1);
     		}
     	}
         return this;
@@ -149,32 +149,46 @@ public class Matriz {
     }
 
     public static void main(String[] args) {
-        Matriz m = new Matriz(1,2);
-        System.out.println("rows = " + m.getRows());
-        System.out.println("columns = " + m.getCols());
-        m.zeros();
-        m.ones();
+        Matriz X = new Matriz(3,1);
+        Matriz A = new Matriz(3,3);
+        Matriz C = new Matriz(3,3);
+        A.set(2,1,10);
+        System.out.println("A");
+        A.print();
+       
+
+        C.zeros();
+        System.out.println("C");
+        C.print();
+        C=A.add(A);
+        System.out.println("C=A+A");
+        C.print();
+        System.out.println("A=C-A");
+        A=C.sub(A);
+        A.print();
+        System.out.println("A=+A");
+        A.add(A);
+        A.print();
+        System.out.println("A=transp(C)");
+        A=C.transp();
+        A.print();
+        X.ones();
+        System.out.println("X");
+        X.print();
+        X.mult(2);
+        System.out.println("X=X*2");
+        X.print();
+        System.out.println("C=A*X");
+        C=A.mult(X);
+        C.print();
+        System.out.println("C=C*X");
+        C.mult(X);
+        C.print();  //MANTER
+        int numerolinhas=A.getRows();
+        int numerocolunas=A.getCols();
         //m.unit();
 
-        m.print();
-
-        Matriz n = new Matriz(4, 4);
-        n.unit();
-        n.print();
-
-        Matriz o = new Matriz(1, 10);
-        o.ones();
-        o.print();
-
-        Matriz p = new Matriz(2, 2);
-        m.set(10, 1, 5);
-        m.print();
-
-        Matriz q = new Matriz(4,2);
-        q.zeros();
-        q.set(4,1,10);
-        q.transp();
-        q.print();
+     
 
 
         //Matriz wrong_m1 = new Matriz(1, -2);
