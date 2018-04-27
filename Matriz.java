@@ -54,32 +54,36 @@ public class Matriz {
     }
 
     public Matriz mult(double valor) {
+    	Matriz return_matrix = new Matriz(nrow,ncol);
     	int i,j;
     	for(i=0; i<nrow; i++){
     		for(j=0; j<ncol; j++){
-    			m[i][j]=m[i][j] * valor;
+    			return_matrix.set(i+1,j+1, m[i][j] * valor);
     		}
     	}
-        return this;
+        return return_matrix;
     }
 
     public Matriz mult(Matriz A) {
+       Matriz return_matrix = new Matriz(nrow,A.getCols()); 
+       double aux;
         if (ncol != A.getRows()) {
     		throw new IndexOutOfBoundsException("Erro: Dimensoes incompativeis de matrizes para multiplicacao");
         }
-        double[][] aux = new double[nrow][ncol];
         for (int i = 0; i < nrow; i++) {
             for (int j = 0; j < A.getCols(); j++) {
+                aux=0;
                 for (int k = 0; k < ncol; k++) {
-                    aux[i][j] += m[i][k] * A.at(k+1, j+1);
+                    aux+=m[i][k] * A.at(k+1, j+1);
                 }
+                return_matrix.set(i+1,j+1,aux);
             }
         }
-        m = aux;
-        return this;
+        return return_matrix;
     }
 
     public Matriz add(Matriz A){
+    	Matriz return_matrix = new Matriz(nrow,ncol);
     	if(A.getRows()!=this.nrow || A.getCols()!=this.ncol){
     		throw new IndexOutOfBoundsException("Erro: A dimensões das matrizes devem ser iguais");
 
@@ -87,13 +91,14 @@ public class Matriz {
     	int i,j;
     	for(i=0; i<nrow; i++){
     		for(j=0; j<ncol; j++){
-    			m[i][j]=m[i][j]+A.at(i+1,j+1);
+    			return_matrix.set(i+1,j+1,(m[i][j]+A.at(i+1,j+1)));
     		}
     	}
-        return this;
+        return return_matrix;
     }
 
     public Matriz sub(Matriz A){
+    	Matriz return_matrix = new Matriz(nrow,ncol);
     	if(A.getRows()!=this.nrow || A.getCols()!=this.ncol){
     		throw new IndexOutOfBoundsException("Erro: A dimensões das matrizes devem ser iguais");
 
@@ -101,25 +106,25 @@ public class Matriz {
     	int i,j;
     	for(i=0; i<nrow; i++){
     		for(j=0; j<ncol; j++){
-    			m[i][j]=m[i][j]-A.at(i+1,j+1);
+    			return_matrix.set(i+1,j+1,(m[i][j]-A.at(i+1,j+1)));
     		}
     	}
-        return this;
+        return return_matrix;
     }
 
     public Matriz transp(){
         double[][] old_m = m;
     	int i,j;
-    	 m = new double[ncol][nrow];
+    	Matriz return_matrix = new Matriz(ncol,nrow);
     	for(i=0; i<ncol; i++){
     		for(j=0; j<nrow; j++){
-    			m[i][j]=old_m[j][i];
+    			return_matrix.set(i+1,j+1,(old_m[j][i]));
     		}
     	}
         int aux = nrow;
         nrow = ncol;
         ncol = aux;
-        return this;
+        return return_matrix;
     }
 
     public double at(int i, int j){
@@ -167,7 +172,7 @@ public class Matriz {
         A=C.sub(A);
         A.print();
         System.out.println("A=+A");
-        A.add(A);
+        A=A.add(A);
         A.print();
         System.out.println("A=transp(C)");
         A=C.transp();
@@ -175,14 +180,14 @@ public class Matriz {
         X.ones();
         System.out.println("X");
         X.print();
-        X.mult(2);
+        X=X.mult(2);
         System.out.println("X=X*2");
         X.print();
         System.out.println("C=A*X");
         C=A.mult(X);
         C.print();
         System.out.println("C=C*X");
-        C.mult(X);
+        C=C.transp().mult(X);
         C.print();  //MANTER
         int numerolinhas=A.getRows();
         int numerocolunas=A.getCols();
