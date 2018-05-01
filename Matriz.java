@@ -1,3 +1,13 @@
+// Universidade Federal de Minas Gerais
+// Programacao Orientada a Objetos
+// 2018-1
+//
+// Trabalho Intermediario 1
+//
+// Andre Lage
+// Augusto Mafra
+//
+
 public class Matriz {
 
     public Matriz(int nrow, int ncol) throws IndexOutOfBoundsException {
