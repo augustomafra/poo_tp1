@@ -65,7 +65,7 @@ public class Matriz {
     }
 
     public Matriz mult(Matriz A) {
-       Matriz return_matrix = new Matriz(nrow,A.getCols()); 
+       Matriz return_matrix = new Matriz(nrow,A.getCols());
        double aux;
         if (ncol != A.getRows()) {
     		throw new IndexOutOfBoundsException("Erro: Dimensoes incompativeis de matrizes para multiplicacao");
@@ -85,7 +85,7 @@ public class Matriz {
     public Matriz add(Matriz A){
     	Matriz return_matrix = new Matriz(nrow,ncol);
     	if(A.getRows()!=this.nrow || A.getCols()!=this.ncol){
-    		throw new IndexOutOfBoundsException("Erro: A dimensões das matrizes devem ser iguais");
+            throw new IndexOutOfBoundsException("Erro: As dimensões das matrizes devem ser iguais");
 
     	}
     	int i,j;
@@ -100,7 +100,7 @@ public class Matriz {
     public Matriz sub(Matriz A){
     	Matriz return_matrix = new Matriz(nrow,ncol);
     	if(A.getRows()!=this.nrow || A.getCols()!=this.ncol){
-    		throw new IndexOutOfBoundsException("Erro: A dimensões das matrizes devem ser iguais");
+            throw new IndexOutOfBoundsException("Erro: As dimensões das matrizes devem ser iguais");
 
     	}
     	int i,j;
@@ -160,7 +160,6 @@ public class Matriz {
         A.set(2,1,10);
         System.out.println("A");
         A.print();
-       
 
         C.zeros();
         System.out.println("C");
@@ -191,13 +190,20 @@ public class Matriz {
         C.print();  //MANTER
         int numerolinhas=A.getRows();
         int numerocolunas=A.getCols();
-        //m.unit();
 
-     
-
-
-        //Matriz wrong_m1 = new Matriz(1, -2);
-        //Matriz wrong_m2 = new Matriz(0, -2);
+        // Testando Excecoes
+        System.out.println("X.unit()");
+        try { X.unit(); } catch (IndexOutOfBoundsException e) { System.out.println(e.getMessage());}
+        System.out.println("new Matriz(1, -2)");
+        try { Matriz wrong_m1 = new Matriz(1, -2); } catch (IndexOutOfBoundsException e) { System.out.println(e.getMessage()); }
+        System.out.println("new Matriz(0, 2)");
+        try { Matriz wrong_m2 = new Matriz(0, 2); } catch (IndexOutOfBoundsException e) { System.out.println(e.getMessage()); }
+        System.out.println("X+A");
+        try { X.add(A); } catch (IndexOutOfBoundsException e) { System.out.println(e.getMessage()); }
+        System.out.println("X-A");
+        try { X.sub(A); } catch (IndexOutOfBoundsException e) { System.out.println(e.getMessage()); }
+        System.out.println("X*A");
+        try { X.mult(A); } catch (IndexOutOfBoundsException e) { System.out.println(e.getMessage()); }
     }
 
     private void expand(int new_nrow, int new_ncol) {
