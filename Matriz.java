@@ -1,6 +1,6 @@
 public class Matriz {
 
-    public Matriz(int nrow, int ncol) {
+    public Matriz(int nrow, int ncol) throws IndexOutOfBoundsException {
         if (ncol <= 0) {
             throw new IndexOutOfBoundsException("Erro: Dimensao invalida para colunas: " + Integer.toString(ncol));
         }
@@ -35,7 +35,7 @@ public class Matriz {
     	}
     }
 
-    public void unit(){
+    public void unit() throws IndexOutOfBoundsException {
     	int i,j;
     	if(ncol!=nrow){
     		throw new IndexOutOfBoundsException("Erro: A matriz identidade deve ser quadrada");
@@ -64,7 +64,7 @@ public class Matriz {
         return return_matrix;
     }
 
-    public Matriz mult(Matriz A) {
+    public Matriz mult(Matriz A) throws IndexOutOfBoundsException {
        Matriz return_matrix = new Matriz(nrow,A.getCols());
        double aux;
         if (ncol != A.getRows()) {
@@ -82,7 +82,7 @@ public class Matriz {
         return return_matrix;
     }
 
-    public Matriz add(Matriz A){
+    public Matriz add(Matriz A) throws IndexOutOfBoundsException {
     	Matriz return_matrix = new Matriz(nrow,ncol);
     	if(A.getRows()!=this.nrow || A.getCols()!=this.ncol){
             throw new IndexOutOfBoundsException("Erro: As dimensões das matrizes devem ser iguais");
@@ -97,7 +97,7 @@ public class Matriz {
         return return_matrix;
     }
 
-    public Matriz sub(Matriz A){
+    public Matriz sub(Matriz A) throws IndexOutOfBoundsException {
     	Matriz return_matrix = new Matriz(nrow,ncol);
     	if(A.getRows()!=this.nrow || A.getCols()!=this.ncol){
             throw new IndexOutOfBoundsException("Erro: As dimensões das matrizes devem ser iguais");
@@ -206,7 +206,7 @@ public class Matriz {
         try { X.mult(A); } catch (IndexOutOfBoundsException e) { System.out.println(e.getMessage()); }
     }
 
-    private void expand(int new_nrow, int new_ncol) {
+    private void expand(int new_nrow, int new_ncol) throws IndexOutOfBoundsException {
         if (new_ncol < ncol) {
             throw new IndexOutOfBoundsException("Erro Interno: Impossivel reduzir matriz de " + Integer.toString(ncol) + " para " + Integer.toString(new_ncol));
         }
